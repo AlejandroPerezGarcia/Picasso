@@ -13,16 +13,14 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.photos_list_item.view.*
 
 
-class PhotoAdapter(private val myDataset: List<Photo>) :
-        RecyclerView.Adapter<PhotoAdapter.PostHolder>(){
-
-
+class PhotoAdapter(private val myDataset: MutableList<Photo>) :
+    RecyclerView.Adapter<PhotoAdapter.PostHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostHolder {
         //crear nueva vista
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.photos_list_item,parent,false)
+            .inflate(R.layout.photos_list_item, parent, false)
         return PostHolder(view)
     }
 
@@ -39,7 +37,14 @@ class PhotoAdapter(private val myDataset: List<Photo>) :
             .into(holder.imagen)
     }
 
-    class PostHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+    fun updateItem(it: List<Photo>) {
+        myDataset.clear()
+        myDataset.addAll(it)
+        notifyDataSetChanged()
+
+    }
+
+    class PostHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         var title: TextView = itemView.txTitle
         var imagen: ImageView = itemView.imageView
