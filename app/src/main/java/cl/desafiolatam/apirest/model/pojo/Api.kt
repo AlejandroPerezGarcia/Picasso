@@ -5,8 +5,5 @@ import retrofit2.http.GET
 
 interface Api {
     @GET("/photos")
-    fun getAllPhotos() : Call<ArrayList<Photo>>
-
-
-
+    fun getAllPhotos(): Call<ArrayList<Photo>>
 }

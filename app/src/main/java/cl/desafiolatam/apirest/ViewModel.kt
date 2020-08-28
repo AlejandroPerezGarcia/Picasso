@@ -1,11 +1,12 @@
 package cl.desafiolatam.apirest
 
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 
-class ViewModelPhoto : ViewModel() {
 
+class ViewModelPhoto(application: Application) : AndroidViewModel(application) {
 
-    private var repository = Repository()
-
+    private var repository = Repository(application)
     val photo = repository.loadPhotoData()
+    val listaPhoto = repository.allPhoto
 }

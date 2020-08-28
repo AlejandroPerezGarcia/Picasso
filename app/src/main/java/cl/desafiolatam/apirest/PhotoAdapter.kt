@@ -6,14 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-
 import androidx.recyclerview.widget.RecyclerView
 import cl.desafiolatam.apirest.model.pojo.Photo
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.photos_list_item.view.*
 
 
-class PhotoAdapter(private val myDataset: MutableList<Photo>) :
+class PhotoAdapter(private var myDataset: MutableList<Photo>) :
     RecyclerView.Adapter<PhotoAdapter.PostHolder>() {
 
 
@@ -29,7 +28,7 @@ class PhotoAdapter(private val myDataset: MutableList<Photo>) :
     }
 
     override fun onBindViewHolder(holder: PostHolder, position: Int) {
-        val post = myDataset[position]
+        var post = myDataset[position]
 
         holder.title.text = post.title
         Picasso.get()
@@ -38,17 +37,16 @@ class PhotoAdapter(private val myDataset: MutableList<Photo>) :
     }
 
     fun updateItem(it: List<Photo>) {
-        myDataset.clear()
-        myDataset.addAll(it)
+         myDataset.clear()
+      // myDataset.addAll(it)
+        myDataset = it.toMutableList()
         notifyDataSetChanged()
-
     }
 
     class PostHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         var title: TextView = itemView.txTitle
         var imagen: ImageView = itemView.imageView
-
     }
 
 }
